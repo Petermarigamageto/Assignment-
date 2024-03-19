@@ -1,0 +1,160 @@
+quiz 1
+
+i.)
+
+"bash
+
+echo"Enter CustomerID:"
+
+read CustomerID
+
+echo"Enter CustomerName:"
+
+read CustomerName
+
+echo"Enter UnitConsumed:"
+
+read UnitConsumed
+
+""
+
+ii.)
+
+""bash
+
+if [$UnitConsumed-le 199]: then ~
+
+Bill=$(echo"$UnitConsumed*120"| bc) ~
+
+elif [$UnitConsumed-ge 200]&&[$UnitConsumed-lt 400]; then
+
+Bill=$(echo"UnitConsumed*150"| bc)
+
+elif[$UnitConsumed-ge 400[&&[$UnitConsumed-lt 600]; then Bill=$(echo"UnitConsumed*180"| bc)
+
+else
+
+Bill=$(echo"$UnitConsumed*200"| bc)
+
+fi
+
+iii.)
+
+"bash
+
+if[$(echo"$Bill>400"| bc)-eg 1]; then
+
+Surcharge=$(echo"$Bill*0.15"| bc)
+
+TotalBill=$(echo"$Bill+$Surcharge" bc)
+
+else
+
+TotalBill=$Bill
+
+fi
+
+echo"Total Electricity Bill for CustomerID $CustomerID ($CustomerName): 
+
+Ksh $TotalBill"
+
+
+
+quiz 2
+
+#include <stdio.h> //for standard input output functions
+
+int main(){
+
+int fd;//file descriptor
+
+char buffer[100]; // buffer for reading and writing data
+
+size_t num_bytes_read,num_bytes_written; //number for bytes read and written
+
+//open a file named "output.txt" in write mode with read-write permissions fd=open("output.txt", O_RDWR | O_CREAT, S_TRUSR | S_TWUSR);
+
+if(fd<0){
+
+perror("open");
+
+exit(1);
+
+}
+
+//write "Hello World" to the file
+
+num_bytes_written write(fd,"Hello World", 11);
+
+if(num_bytes_written<0){
+
+perror("write");
+
+exit(1);
+
+}
+
+// move the file cursor to the beginning of the file
+
+Iseek(fd,o,SEEK_SET);
+
+//read the content of the file into the buffer
+
+| nu m\ bytes\ read=read(fd,buffer,sizeof(buffer);
+
+if(num_bytes_read<0){
+
+perror("read");
+
+exit (1) ;
+
+}
+//null-terminate the buffer to treat it as a string buffer[num_bytes_read+'\0';
+
+//print the read content
+
+printf("content read from file:%s\n", buffer;
+
+//close the file
+
+close(fd);
+
+return 0;
+
+
+
+
+
+
+
+
+
+quiz 3
+
+#!bash
+
+# Prompt user for input
+read -p "Enter employee name: " name
+read -p "Enter hours worked: " hours
+read -p "Enter rate per hour: " rate
+
+# Calculate basic pay
+basic_pay=$(echo "$hours * $rate" | bc)
+
+# Calculate tax based on basic pay
+if [ $basic_pay -gt 70000 ]; then
+    tax=$(echo "0.25 * $basic_pay" | bc)
+elif [ $basic_pay -ge 15000 ]; then
+    tax=$(echo "0.15 * $basic_pay" | bc)
+else
+    tax=0
+fi
+
+# Calculate net pay
+net_pay=$(echo "$basic_pay - $tax" | bc)
+
+# Display results
+echo "Employee: $name"
+echo "Basic Pay: $basic_pay"
+echo "Tax: $tax"
+echo "Net Pay: $net_pay"
